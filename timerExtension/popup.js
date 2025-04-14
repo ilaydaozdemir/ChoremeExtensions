@@ -16,3 +16,24 @@ setInterval(updateTimeElements, 1000);
 chrome.storage.sync.get(["name"], (res) => {
   nameElement.textContent = `Your name is: ${res.name}`;
 });
+
+const startButton = document.getElementById("start");
+const stopButton = document.getElementById("stop");
+const resetButton = document.getElementById("reset");
+
+startButton.addEventListener("click", () => {
+  chrome.storage.local.set({
+    isRunning: true,
+  });
+});
+stopButton.addEventListener("click", () => {
+  chrome.storage.local.set({
+    isRunning: false,
+  });
+});
+resetButton.addEventListener("click", () => {
+  chrome.storage.local.set({
+    timer: 0,
+    isRunning: false,
+  });
+});
