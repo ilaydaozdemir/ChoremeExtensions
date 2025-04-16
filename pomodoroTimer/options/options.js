@@ -5,3 +5,14 @@ timeOption.addEventListener("change", (event) => {
     timeOption.value = 25;
   }
 });
+const saveButton = document.getElementById("save-button");
+saveButton.addEventListener("click", () => {
+  chrome.storage.local.set({
+    timer: 0,
+    timeOption: timeOption.value,
+    isRunning: false,
+  });
+});
+chrome.storage.local.get(["timeOption"], (res) => {
+  timeOption.value = res.timeOption;
+});
